@@ -13,6 +13,7 @@ for (btn of allBtn) {
     console.log(count);
     const btn = e.target;
     btn.setAttribute("disabled", "true");
+
     const sitCount = document.getElementById("sit-number");
     sitCount.innerText = count;
     seatsLeft.innerText = parseInt(seatsLeft.innerText) - 1;
