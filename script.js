@@ -1,3 +1,11 @@
+const totalPrice = document.getElementById("total-price");
+const grandTotalSection = document.getElementById("grandtotal-section");
+const grandTotalPrice = document.getElementById("grandtotal-price");
+const couponInput = document.getElementById("Coupon-input");
+const passengerName = document.getElementById("p-name");
+const phoneNumber = document.getElementById("phone-number");
+const sitCount = document.getElementById("sit-number");
+const nextBtn = document.getElementById("next-btn");
 let allBtn = document.getElementsByClassName("sit-btn");
 let seatsLeft = document.getElementById("seats-left");
 let count = 0;
@@ -8,12 +16,9 @@ for (btn of allBtn) {
     if (clickCount > 4) {
       btn.setAttribute(("disabled", "true"));
     }
-
     count++;
-    console.log(count);
     const btn = e.target;
     btn.setAttribute("disabled", "true");
-
     const sitCount = document.getElementById("sit-number");
     sitCount.innerText = count;
     seatsLeft.innerText = parseInt(seatsLeft.innerText) - 1;
@@ -35,29 +40,21 @@ for (btn of allBtn) {
     grandTotalPrice.innerText = parseInt(totalPrice.innerText);
   });
 }
-const totalPrice = document.getElementById("total-price");
-const grandTotalSection = document.getElementById("grandtotal-section");
-const grandTotalPrice = document.getElementById("grandtotal-price");
-const couponInput = document.getElementById("Coupon-input");
 function checkCupon() {
-  if (couponInput.value === "NEW15") {
+  if (couponInput.value === "NEW15" && (sitCount.innerText !== "0")) {
     grandTotalPrice.innerText =
       parseInt(grandTotalPrice.innerText) -
       parseInt(grandTotalPrice.innerText) * 0.15;
     grandTotalSection.classList.add("hidden");
-  } else if (couponInput.value === "Couple 20") {
+  } else if (couponInput.value === "Couple 20" && (sitCount.innerText !== "0")) {
     grandTotalPrice.innerText =
       parseInt(grandTotalPrice.innerText) -
       parseInt(grandTotalPrice.innerText) * 0.2;
     grandTotalSection.classList.add("hidden");
-  } else if (grandTotalPrice.innerText === "0") {
+  } else if (parseInt(sitCount.innerText) === 0) {
     alert("add minimum one ticket");
   } else alert("Input right code");
 }
-const passengerName = document.getElementById("p-name");
-const phoneNumber = document.getElementById("phone-number");
-const nextBtn = document.getElementById("next-btn");
-
 function toggleButtonState() {
   if (
     passengerName.value === "" ||
@@ -72,7 +69,6 @@ function toggleButtonState() {
 toggleButtonState();
 passengerName.addEventListener("input", toggleButtonState);
 phoneNumber.addEventListener("input", toggleButtonState);
-
 function submit() {
   document.getElementById("header").classList.add("hidden");
   document.getElementById("main").classList.add("hidden");
